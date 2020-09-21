@@ -16,7 +16,7 @@ function connectSockets(io) {
         })
         socket.on('updateBoard', board => {
             console.log('updatedBoard? ', board)
-            socket.to(socket.board).emit('updatedBoard', board)
+            io.to(socket.board).emit('updatedBoard', board)
         })
 
     })
