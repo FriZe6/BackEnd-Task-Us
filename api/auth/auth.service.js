@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const userService = require('../users/user.service')
+const userService = require('../user/user.service')
 
 const saltRounds = 10
 
