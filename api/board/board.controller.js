@@ -2,7 +2,6 @@ const boardService = require("./board.service");
 
 // GET LIST
 async function getBoards(req, res) {
-    console.log('FIRST GOT TO BOARDS',)
     const boards = await boardService.query()
     res.send(boards)
 }
@@ -24,8 +23,8 @@ async function addBoard(req, res) {
 
 // UPDATE
 async function updateBoard(req, res) {
-    const board = await boardService.update(req.body)
-    res.send(board)
+    await boardService.update(req.body)
+    res.send('updated successfuly')
 }
 
 

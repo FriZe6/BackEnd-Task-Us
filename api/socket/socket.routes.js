@@ -7,7 +7,6 @@ function connectSockets(io) {
     io.on('connection', socket => {
 
         socket.on('board', boardId => {
-            console.log('board page? ', boardId)
             if (socket.board) {
                 socket.leave(socket.boardId)
             }
@@ -15,10 +14,8 @@ function connectSockets(io) {
             socket.board = boardId;
         })
         socket.on('updateBoard', board => {
-            console.log('updatedBoard? ', board)
-            io.to(socket.board).emit('updatedBoard', board)
+            socket.broadcast.emit('updatedBoard', board)
         })
-
     })
 }
 

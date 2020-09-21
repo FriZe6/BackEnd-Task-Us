@@ -41,7 +41,7 @@ async function update(user) {
 
 async function getByUsername(username){
     try{
-        const collection = dbService.getCollection('user')
+        const collection = await dbService.getCollection('user')
         const user = await collection.findOne({"username": username})
         return user;
     } catch (err) {
