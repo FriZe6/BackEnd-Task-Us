@@ -6,24 +6,19 @@ function connectSockets(io) {
     //TODO: Complete Overhaul
     io.on('connection', socket => {
 
-        socket.on('chat toyPage', toyPage => {
-            console.log('toy page? ', toyPage)
-            if (socket.toyPage) {
-                socket.leave(socket.toyPage)
+        socket.on('board', boardId => {
+            console.log('board page? ', boardId)
+            if (socket.board) {
+                socket.leave(socket.boardId)
             }
-            socket.join(toyPage)
-            socket.toyPage = toyPage;
+            socket.join(boardId)
+            socket.board = boardId;
         })
-        socket.on('chat newMsg', msg => {
-            console.log(msg)
-            // io.emit('chat addMsg', msg)
-            // emits only to sockets in the same room
-            io.to(socket.toyPage).emit('chat addMsg', msg)
+        socket.on('updateBoard', board => {
+            console.log('updatedBoard? ', board)
+            socket.to(socket.board).emit('updatedBoard', board)
         })
-        socket.on('chat typing', loggedUser => {
-            // io.emit('chat addMsg', msg)
-            // emits only to sockets in the same room
-            io.to(socket.toyPage).emit('chat showTyping', loggedUser)
-        })
+
     })
 }
+
