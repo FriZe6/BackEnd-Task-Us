@@ -23,8 +23,12 @@ async function addBoard(req, res) {
 
 // UPDATE
 async function updateBoard(req, res) {
+    console.log('----------', req.body, '------------');
+    console.log('----------', req.body.groups[0].tasks[0], '------------');
+    console.log('before accessing the service');
     const board = await boardService.update(req.body)
-    res.send(board)
+    console.log('after accessing the service, got:', board);
+    res.send('updated successfuly')
 }
 
 
