@@ -8,6 +8,7 @@ async function login(username, password) {
 
     const user = await userService.getByUsername(username)
     if (!user) return Promise.reject('Invalid email or password')
+    console.log('found user');
     const match = await bcrypt.compare(password, user.password)
     if (!match) return Promise.reject('Invalid email or password')
 
@@ -15,10 +16,9 @@ async function login(username, password) {
     return user;
 }
 
-async function signup(password, username, nickname) {
-    if (!password || !username) return Promise.reject('username and password are required!')
-    const hash = await bcrypt.hash(password, saltRounds)
-    return await userService.add({ password: hash, username, nickname })
+async function signup(user) {
+    const hash = await bcrypt.hash(user.password, saltRounds)
+    return await userService.add({ ...user, password: hash })
 }
 
 module.exports = {
