@@ -10,7 +10,6 @@ module.exports = {
 }
 
 async function query(filterBy = {}) {
-    console.log('THEN GOT TO QUERY',)
     //TODO: handle criteria
     const criteria = {}
     try {

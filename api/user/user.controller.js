@@ -7,7 +7,6 @@ async function getUsers(req, res) {
 async function getUser(req, res) {
     const userId = req.params.id
     const user = await userService.query(userId)
-    console.log('got user from database:', user);
     res.send(user)
 }
 async function addUser(req, res) {

@@ -2,7 +2,6 @@ const boardService = require("./board.service");
 
 // GET LIST
 async function getBoards(req, res) {
-    console.log('FIRST GOT TO BOARDS',)
     const boards = await boardService.query()
     res.send(boards)
 }
