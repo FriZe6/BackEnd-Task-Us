@@ -36,13 +36,13 @@ const connectSockets = require('./api/socket/socket.routes')
 
 
 // Routes
-app.use('board', boardRoutes)
-app.use('api/user', userRoutes)
+app.use('/api/board', boardRoutes)
+app.use('/api/user', userRoutes)
 connectSockets(io)
 
-// app.get('/**', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// })
+app.get('/**', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+})
 
 http.listen(port, () => {
     (`listening on http://localhost:${port}`)
