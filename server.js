@@ -36,8 +36,8 @@ const connectSockets = require('./api/socket/socket.routes')
 
 
 // Routes
-app.use('/board/api', boardRoutes)
-app.use('/user/api', userRoutes)
+app.use('/api/board', boardRoutes)
+app.use('/api/user', userRoutes)
 connectSockets(io)
 
 app.get('/**', (req, res) => {
@@ -45,7 +45,7 @@ app.get('/**', (req, res) => {
 })
 
 http.listen(port, () => {
-    (`listening on http://localhost:${port}`)
+    console.log(`listening on http://localhost:${port}`)
 })
 
 
