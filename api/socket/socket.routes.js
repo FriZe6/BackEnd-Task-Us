@@ -14,9 +14,8 @@ function connectSockets(io) {
             socket.board = boardId;
         })
         socket.on('updateBoard', board => {
-            socket.to(socket.board).emit('updatedBoard', board)
+            socket.broadcast.emit('updatedBoard', board)
         })
-
     })
 }
 
