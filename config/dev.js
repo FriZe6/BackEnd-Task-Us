@@ -1,5 +1,5 @@
 module.exports = {
-  "dbURL": "mongodb+srv://admin-roei:J3hVN0no2gT34DOe@cluster0.w6v1w.mongodb.net/<dbname>?retryWrites=true&w=majority",
   // "dbURL": "mongodb://localhost:27017",
+  "dbURL": "mongodb+srv://liam:vt7jjarHg41e4886@cluster@cluster0.0wakh.mongodb.net/task-usDB?retryWrites=true&w=majority",
   "dbName": "task-usDB"
 }
