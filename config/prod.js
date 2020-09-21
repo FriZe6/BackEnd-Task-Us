@@ -1,5 +1,4 @@
-//TODO: change dbUrl
 module.exports = {
-  "mongodb+srv": "//liam:dUnuj1U8JC9ZXBfS@cluster0.0wakh.mongodb.net/test",
+  "dbURL": " mongodb+srv://liam:dUnuj1U8JC9ZXBfS@cluster0.0wakh.mongodb.net/?retryWrites=true&w=majority",
   "dbName": "task-usDB"
 }
