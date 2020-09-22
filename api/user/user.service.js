@@ -4,7 +4,6 @@ const ObjectId = require('mongodb').ObjectId
 
 async function query(userId) {
     try {
-        console.log('searching for user:', userId);
         const collection = await dbService.getCollection('user')
         if (userId) return await collection.findOne({ "_id": ObjectId(userId) })
         else return await collection.find().toArray()
@@ -39,17 +38,17 @@ async function update(user) {
 
 }
 
-async function getByUsername(username){
-    try{
+async function getByUsername(username) {
+    try {
         const collection = await dbService.getCollection('user')
-        const user = await collection.findOne({"username": username})
+        const user = await collection.findOne({ "username": username })
         return user;
     } catch (err) {
         console.log('Error, cannot find user', err)
         throw err
     }
 }
- 
+
 
 module.exports = {
     add,
