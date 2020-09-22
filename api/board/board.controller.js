@@ -3,12 +3,12 @@ const boardService = require("./board.service");
 // GET LIST
 async function getBoards(req, res) {
     const boards = await boardService.query()
-    res.send(boards)
+    res.json(boards)
 }
 // GET SINGLE
 async function getBoard(req, res) {
     const board = await boardService.getById(req.params.id)
-    res.send(board)
+    res.json(board)
 }
 // DELETE
 async function removeBoard(req, res) {
@@ -18,13 +18,14 @@ async function removeBoard(req, res) {
 // CREATE
 async function addBoard(req, res) {
     const board = await boardService.add(req.body)
-    res.send(board)
+    res.json(board)
 }
 
 // UPDATE
 async function updateBoard(req, res) {
+    console.log('REQ THE BODYYYYYYY',req.body);
     const board = await boardService.update(req.body)
-    res.send(board)
+    res.json(board)
 }
 
 
