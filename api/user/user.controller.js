@@ -14,8 +14,8 @@ async function addUser(req, res) {
     res.send(user)
 }
 async function updateUser(req, res) {
-    const user = await userService.update(req.body)
-    res.send(user)
+    await userService.update(req.body)
+    res.send('updated successfully')
 }
 
 
