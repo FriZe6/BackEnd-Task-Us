@@ -6,15 +6,18 @@ function connectSockets(io) {
     //TODO: Complete Overhaul
     io.on('connection', socket => {
 
-        socket.on('board', boardId => {
-            if (socket.board) {
-                socket.leave(socket.boardId)
+        socket.on('user', userId => {
+            if (socket.user) {
+                socket.leave(socket.userId)
             }
-            socket.join(boardId)
-            socket.board = boardId;
+            socket.join(userId)
+            socket.user = userId;
         })
         socket.on('updateBoard', board => {
             socket.broadcast.emit('updatedBoard', board)
+        })
+        socket.on('send-notif', data =>{
+            socket.to(data.memberId).emit('accept-notif', data.notification)
         })
     })
 }
