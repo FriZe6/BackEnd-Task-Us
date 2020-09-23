@@ -26,11 +26,10 @@ async function add(user) {
 
 }
 async function update(user) {
-    user.updatedAt = Date.now();
+    const collection = await dbService.getCollection('user')
     try {
-        const collection = await dbService.getCollection('user')
         await collection.updateOne({ "_id": ObjectId(user._id) }, { $set: { ...user, _id: ObjectId(user._id) } })
-        return user
+        return Promise.resolve()
     } catch (err) {
         console.log('Error, cannot update user', err)
         throw err
