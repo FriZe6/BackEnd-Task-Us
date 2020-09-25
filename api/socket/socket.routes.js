@@ -17,7 +17,7 @@ function connectSockets(io) {
             socket.broadcast.emit('updatedBoard', board)
         })
         socket.on('send-notif', data =>{
-            socket.to(data.memberId).emit('accept-notif', data.notification)
+            socket.to(data.userId).emit('accept-notif', data.notification)
         })
     })
 }

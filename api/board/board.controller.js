@@ -23,6 +23,7 @@ async function addBoard(req, res) {
 
 // UPDATE
 async function updateBoard(req, res) {
+    console.log('got board:', req.body);
     await boardService.update(req.body)
     res.send('updated successfuly')
 }
