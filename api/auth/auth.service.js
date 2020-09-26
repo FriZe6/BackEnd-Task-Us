@@ -3,7 +3,20 @@ const userService = require('../user/user.service')
 
 const saltRounds = 10
 
-async function login(username, password) {
+async function login(username, password, facebook = '', imgUrl, email) {
+    if (facebook) {
+        const facebookUser = {
+            fullName: username,
+            username,
+            imgUrl: imgUrl,
+            email: email,
+            boards: [],
+            notifications: [],
+            password:'0000'
+        }
+        const newUser=await signup(facebookUser)
+        return newUser
+    }
     if (!username || !password) return Promise.reject('email and password are required!')
 
     const user = await userService.getByUsername(username)

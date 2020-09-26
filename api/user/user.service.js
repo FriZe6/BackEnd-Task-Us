@@ -15,6 +15,8 @@ async function query(userId) {
 
 async function add(user) {
     user.createdAt = Date.now();
+        const newUser=await getByUsername(user.username)
+        if(newUser) return user
     try {
         const collection = await dbService.getCollection('user')
         await collection.insertOne(user)
