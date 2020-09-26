@@ -15,7 +15,7 @@ async function query(userId) {
 
 async function add(user) {
     user.createdAt = Date.now();
-        const newUser=await getByUsername(user.username)
+        const newUser=await getByUsername(user.username, user)
         if(newUser) return user
     try {
         const collection = await dbService.getCollection('user')
@@ -39,10 +39,14 @@ async function update(user) {
 
 }
 
-async function getByUsername(username) {
+async function getByUsername(username, facebookUser) {
     try {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ "username": username })
+        if(facebookUser){
+            facebookUser._id= ObjectId(user._id) 
+            return facebookUser
+        }
         return user;
     } catch (err) {
         console.log('Error, cannot find user', err)
