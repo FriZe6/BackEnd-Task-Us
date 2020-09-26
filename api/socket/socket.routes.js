@@ -16,6 +16,10 @@ function connectSockets(io) {
         socket.on('updateBoard', board => {
             socket.broadcast.emit('updatedBoard', board)
         })
+        socket.on('add-delete-board', () =>{
+            console.log('echoing request...');
+            socket.broadcast.emit('reloadBoards')
+        })
         socket.on('send-notif', data =>{
             socket.to(data.userId).emit('accept-notif', data.notification)
         })
