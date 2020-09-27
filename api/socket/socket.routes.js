@@ -17,7 +17,6 @@ function connectSockets(io) {
             socket.broadcast.emit('updatedBoard', board)
         })
         socket.on('add-delete-board', () =>{
-            console.log('echoing request...');
             socket.broadcast.emit('reloadBoards')
         })
         socket.on('send-notif', data =>{
