@@ -6,7 +6,6 @@ async function query(userId) {
         const collection = await dbService.getCollection('user')
         if (userId) {
             const user = await collection.findOne({ "_id": ObjectId(userId) })
-            console.log('user id:', user)
             return user
         }
         else return await collection.find().toArray()
