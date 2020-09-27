@@ -29,9 +29,21 @@ async function logout(req, res) {
         res.status(500).send({ error: err })
     }
 }
+async function update(req, res) {
+    const user = req.body
+    try {
+        console.log('USEr>?', user)
+        const updatedUser = await authService.update(user)
+        console.log('updatedUser>?', updatedUser)
+        res.json(updatedUser)
+    } catch (err) {
+        res.status(401).send({ error: err })
+    }
+}
 
 module.exports = {
     login,
     signup,
-    logout
+    logout,
+    update
 }

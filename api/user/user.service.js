@@ -15,8 +15,8 @@ async function query(userId) {
 
 async function add(user) {
     user.createdAt = Date.now();
-        const newUser=await getByUsername(user.username)
-        if(newUser) return user
+    const newUser = await getByUsername(user.username)
+    if (newUser) return user
     try {
         const collection = await dbService.getCollection('user')
         await collection.insertOne(user)
@@ -31,7 +31,7 @@ async function update(user) {
     const collection = await dbService.getCollection('user')
     try {
         await collection.updateOne({ "_id": ObjectId(user._id) }, { $set: { ...user, _id: ObjectId(user._id) } })
-        return Promise.resolve()
+        return user
     } catch (err) {
         console.log('Error, cannot update user', err)
         throw err
