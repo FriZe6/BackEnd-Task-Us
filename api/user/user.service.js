@@ -1,4 +1,3 @@
-
 const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId
 
@@ -31,7 +30,7 @@ async function add(user) {
 async function update(user) {
     const collection = await dbService.getCollection('user')
     try {
-        await collection.updateOne({ "_id": ObjectId(user._id) }, { $set: { ...user, _id: ObjectId(user._id) } })
+        await collection.updateOne({ "_id": ObjectId(user._id) }, { $set: {...user, _id: ObjectId(user._id) } })
         return Promise.resolve()
     } catch (err) {
         console.log('Error, cannot update user', err)
