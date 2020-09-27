@@ -15,8 +15,10 @@ async function query(userId) {
 
 async function add(user) {
     user.createdAt = Date.now();
+    if(user.facebook){
         const newUser=await getByUsername(user.username, user)
         if(newUser) return user
+    }
     try {
         const collection = await dbService.getCollection('user')
         await collection.insertOne(user)
@@ -25,7 +27,6 @@ async function add(user) {
         console.log('Error, cannot create user', err)
         throw err
     }
-
 }
 async function update(user) {
     const collection = await dbService.getCollection('user')
@@ -36,7 +37,6 @@ async function update(user) {
         console.log('Error, cannot update user', err)
         throw err
     }
-
 }
 
 async function getByUsername(username, facebookUser) {
@@ -53,8 +53,6 @@ async function getByUsername(username, facebookUser) {
         throw err
     }
 }
-
-
 module.exports = {
     add,
     query,
