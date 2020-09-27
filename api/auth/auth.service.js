@@ -3,8 +3,7 @@ const userService = require('../user/user.service')
 
 const saltRounds = 10
 
-async function login(username, password, facebook = '', imgUrl, email) {
-    console.log(facebook);
+async function login(username, password, facebook = false, imgUrl, email) {
     if (facebook) {
         const facebookUser = {
             fullName: username,
@@ -23,6 +22,7 @@ async function login(username, password, facebook = '', imgUrl, email) {
     const user = await userService.getByUsername(username)
     if (!user) return Promise.reject('Invalid email or password')
     const match = await bcrypt.compare(password, user.password)
+    console.log('match?', match)
     if (!match) return Promise.reject('Invalid email or password')
 
     delete user.password;
@@ -30,7 +30,6 @@ async function login(username, password, facebook = '', imgUrl, email) {
 }
 
 async function signup(user) {
-    console.log(user);
     const hash = await bcrypt.hash(user.password, saltRounds)
     return await userService.add({ ...user, password: hash })
 }

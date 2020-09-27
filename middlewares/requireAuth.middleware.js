@@ -1,7 +1,5 @@
 
 async function requireAuth(req, res, next) {
-  console.log('HELLO>?',)
-  //TODO: check if guest, allow to pass
   if (!req.session || !req.session.user) {
     res.status(401).end('Unauthorized!');
     return;

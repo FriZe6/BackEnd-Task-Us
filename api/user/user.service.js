@@ -4,7 +4,11 @@ const ObjectId = require('mongodb').ObjectId
 async function query(userId) {
     try {
         const collection = await dbService.getCollection('user')
-        if (userId) return await collection.findOne({ "_id": ObjectId(userId) })
+        if (userId) {
+            const user = await collection.findOne({ "_id": ObjectId(userId) })
+            console.log('user id:', user)
+            return user
+        }
         else return await collection.find().toArray()
     } catch (err) {
         console.log('Error, cannot find user/s', err)
