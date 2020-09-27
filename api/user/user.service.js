@@ -1,4 +1,3 @@
-
 const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId
 
@@ -15,8 +14,10 @@ async function query(userId) {
 
 async function add(user) {
     user.createdAt = Date.now();
-    const newUser = await getByUsername(user.username)
-    if (newUser) return user
+    if (user.facebook) {
+        const newUser = await getByUsername(user.username, user)
+        if (newUser) return user
+    }
     try {
         const collection = await dbService.getCollection('user')
         await collection.insertOne(user)
@@ -25,7 +26,6 @@ async function add(user) {
         console.log('Error, cannot create user', err)
         throw err
     }
-
 }
 async function update(user) {
     const collection = await dbService.getCollection('user')
@@ -36,21 +36,22 @@ async function update(user) {
         console.log('Error, cannot update user', err)
         throw err
     }
-
 }
 
-async function getByUsername(username) {
+async function getByUsername(username, facebookUser) {
     try {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ "username": username })
+        if (facebookUser) {
+            facebookUser._id = ObjectId(user._id)
+            return facebookUser
+        }
         return user;
     } catch (err) {
         console.log('Error, cannot find user', err)
         throw err
     }
 }
-
-
 module.exports = {
     add,
     query,
