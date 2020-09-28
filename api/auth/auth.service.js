@@ -23,6 +23,7 @@ async function login(username, password, facebook, imgUrl, email) {
     const user = await userService.getByUsername(username)
     if (!user) return Promise.reject('Invalid email or password')
     const match = await bcrypt.compare(password, user.password)
+    console.log('match?', match)
     if (!match) return Promise.reject('Invalid email or password')
 
     delete user.password;
