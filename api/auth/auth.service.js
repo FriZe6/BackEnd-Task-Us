@@ -34,13 +34,6 @@ async function signup(user) {
     return await userService.add({ ...user, password: hash })
 }
 async function update(user) {
-    if (user.password) {
-        const hash = await bcrypt.hash(user.password, saltRounds)
-        user = {
-            ...user,
-            password: hash
-        }
-    }
     await userService.update({ ...user })
     return user
 }
