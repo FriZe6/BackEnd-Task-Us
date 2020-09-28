@@ -3,7 +3,7 @@ const userService = require('../user/user.service')
 
 const saltRounds = 10
 
-async function login(username, password, facebook = false, imgUrl, email) {
+async function login(username, password, facebook, imgUrl, email) {
     if (facebook) {
         const facebookUser = {
             fullName: username,
@@ -12,7 +12,8 @@ async function login(username, password, facebook = false, imgUrl, email) {
             email: email,
             boards: [],
             notifications: [],
-            password: '0000'
+            password: '0000',
+            facebook
         }
         const newUser = await signup(facebookUser)
         return newUser
@@ -34,13 +35,6 @@ async function signup(user) {
     return await userService.add({ ...user, password: hash })
 }
 async function update(user) {
-    if (user.password) {
-        const hash = await bcrypt.hash(user.password, saltRounds)
-        user = {
-            ...user,
-            password: hash
-        }
-    }
     await userService.update({ ...user })
     return user
 }
