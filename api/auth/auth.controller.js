@@ -1,7 +1,6 @@
 const authService = require('./auth.service')
 
 async function login(req, res) {
-    console.log('req?', req.body)
     const { username, password, facebookId, imgUrl, email } = req.body
     try {
         const user = await authService.login(username, password, facebookId, imgUrl, email)

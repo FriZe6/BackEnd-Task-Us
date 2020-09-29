@@ -17,7 +17,6 @@ async function query(userId) {
 
 async function add(user) {
     user.createdAt = Date.now();
-    console.log('user facebook', user.facebook)
     if (user.facebook) {
         const newUser = await getByUsername(user.username, user)
         if (newUser) return user
