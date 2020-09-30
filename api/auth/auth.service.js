@@ -30,6 +30,8 @@ async function login(username, password, facebook, imgUrl, email) {
 }
 
 async function signup(user) {
+    const userSaved = await userService.getByUsername(user.username);
+    if(userSaved) return Promise.reject('Username is taken!')
     const hash = await bcrypt.hash(user.password, saltRounds)
     return await userService.add({ ...user, password: hash })
 }

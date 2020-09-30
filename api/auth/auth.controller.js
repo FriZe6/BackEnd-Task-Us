@@ -18,7 +18,7 @@ async function signup(req, res) {
         req.session.user = newUser
         res.json(newUser)
     } catch (err) {
-        res.status(500).send({ error: 'could not signup, please try later' })
+        res.status(500).send(err)
     }
 }
 async function logout(req, res) {
